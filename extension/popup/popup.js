@@ -5,7 +5,7 @@ let submitseedwords = document.getElementById('submitseedwords');
 let addcreds = document.getElementById('addcreds');
 let add = document.getElementById('add');
 let login = document.getElementById('login');
-let urlname = document.getElementById('urlname');
+// // let urlname = document.getElementById('urlname');
 let username = document.getElementById('username');
 let password = document.getElementById('password');
 
@@ -72,7 +72,7 @@ function enterseedwords(){
   addcreds.style.display = 'none';
   add.style.display = 'none';
   login.style.display = 'none';
-  urlname.style.display = 'none';
+  // urlname.style.display = 'none';
   username.style.display = 'none';
   password.style.display = 'none'
 }
@@ -85,10 +85,10 @@ function verifyseedwords(){
   postseedwords.style.display = 'none';
   seedwords.style.display = 'none';
   submitseedwords.style.display = 'none';
-  addcreds.style.display = 'block';
+  addcreds.style.display = 'inline-block';
   add.style.display = 'none';
-  login.style.display = 'block';
-  urlname.style.display = 'none';
+  login.style.display = 'inline-block';
+  // urlname.style.display = 'none';
   username.style.display = 'none';
   password.style.display = 'none'
 }
@@ -100,20 +100,22 @@ function showaddpage(){
   seedwords.style.display = 'none';
   submitseedwords.style.display = 'none';
   addcreds.style.display = 'none';
-  add.style.display = 'block';
-  login.style.display = 'add';
-  urlname.style.display = 'block';
+  add.style.display = 'inline-block';
+  login.style.display = 'none';
+  // urlname.style.display = 'block';
   username.style.display = 'block';
   password.style.display = 'block'
 }
 
-function addsubmit(){
+async function addsubmit(){
   // send data and show add/login
   var data = {
-    url: urlname.value,
+    // url: urlname.value,
     user: username.value,
     pass: password.value
   }
+  var test = await encryptPassword(data["user"]+data["pass"]);
+  console.log("hash:"+test);
   verifyseedwords();
 }
 

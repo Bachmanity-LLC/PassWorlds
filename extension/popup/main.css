@@ -1,0 +1,83 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Sofia', cursive;
+    text-align: center;
+    width: 300px;
+    height: 400px;
+    border-radius: 5px;
+    /* background: #222; */
+}
+
+input{
+    margin: 15px auto;
+    padding: 8px;
+    border-radius: 1em;
+    outline: none;
+    border: 1px solid #000;
+    transition: all .2s linear;
+}
+
+input:hover{
+    box-shadow: 0 7.5px 10px 0 rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+}
+
+h1{
+    color: #1111dd;
+    cursor: pointer;
+}
+
+[type="submit"]{
+    /* padding: 10px 10px; */
+    width: 100px;
+    cursor: pointer;
+    border: 2px solid #11ee11;
+    color: #11ee11;
+    background: transparent;
+}
+
+[type="submit"]:hover{
+    color: #fff;
+    border: 2px solid transparent;
+    background: #11ee11;
+    box-shadow: 0 7.5px 10px 0 rgba(17,238,17,0.3);
+}
+
+#login {
+    border: 2px solid #11ee11;
+    color: #11ee11;
+}
+
+#login:hover{
+    color: #fff;
+    border: 2px solid transparent;
+    background: #11ee11;
+    box-shadow: 0 7.5px 10px 0 rgba(17,238,17,0.3);
+}
+
+#addcreds {
+    border: 2px solid #fffb01;
+    color: #fffb01;
+}
+
+#addcreds:hover{
+    color: #fff;
+    border: 2px solid transparent;
+    background: #fffb01;
+    box-shadow: 0 7.5px 10px 0 rgba(238,238,34,0.3);
+}
+
+#add {
+    border: 2px solid #fffb01;
+    color: #fffb01;
+}
+
+#add:hover{
+    color: #fff;
+    border: 2px solid transparent;
+    background: #fffb01;
+    box-shadow: 0 7.5px 10px 0 rgba(238,238,34,0.3);
+}
