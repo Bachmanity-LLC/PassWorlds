@@ -2,6 +2,12 @@ let getseedwords = document.getElementById('getseedwords');
 let postseedwords = document.getElementById('postseedwords');
 let seedwords = document.getElementById('seedwords');
 let submitseedwords = document.getElementById('submitseedwords');
+let addcreds = document.getElementById('addcreds');
+let add = document.getElementById('add');
+let login = document.getElementById('login');
+let urlname = document.getElementById('urlname');
+let username = document.getElementById('username');
+let password = document.getElementById('password');
 
 // useri.onclick = function (element) {
 //   let color = element.target.value;
@@ -25,6 +31,16 @@ let submitseedwords = document.getElementById('submitseedwords');
 getseedwords.addEventListener('click',generateseedwords);
 postseedwords.addEventListener('click',enterseedwords);
 submitseedwords.addEventListener('click',verifyseedwords);
+addcreds.addEventListener('click',showaddpage);
+add.addEventListener('click',addsubmit);
+login.addEventListener('click',fire);
+
+chrome.storage.sync.get(['key'], function(result) {
+  if(result.key === true){
+    console.log("already generated!!");
+    enterseedwords();
+  }
+});
 
 function generateseedwords(){
   //generate function
@@ -32,12 +48,12 @@ function generateseedwords(){
   chrome.storage.sync.get(['key'], function(result) {
     if(result.key === true){
       console.log("already generated!!");
-      //Show enter seedwords
+      enterseedwords();
     }
     else{
       chrome.storage.sync.set({'key': true}, function() {
         console.log("done!!");
-        //Show enter seedwords
+        enterseedwords();
       });
     }
   });
@@ -49,12 +65,60 @@ function generateseedwords(){
 
 function enterseedwords(){
   //Show enter seedwords
+  getseedwords.style.display = 'none';
+  postseedwords.style.display = 'none';
+  seedwords.style.display = 'block';
+  submitseedwords.style.display = 'block';
+  addcreds.style.display = 'none';
+  add.style.display = 'none';
+  login.style.display = 'none';
+  urlname.style.display = 'none';
+  username.style.display = 'none';
+  password.style.display = 'none'
 }
 
 function verifyseedwords(){
   // truffle call
-  // if true show Login button and add button
+  // if true set in local storage and show Login button and add button
   // else same enter seedwords
+  getseedwords.style.display = 'none';
+  postseedwords.style.display = 'none';
+  seedwords.style.display = 'none';
+  submitseedwords.style.display = 'none';
+  addcreds.style.display = 'block';
+  add.style.display = 'none';
+  login.style.display = 'block';
+  urlname.style.display = 'none';
+  username.style.display = 'none';
+  password.style.display = 'none'
+}
+
+function showaddpage(){
+  //show add details 
+  getseedwords.style.display = 'none';
+  postseedwords.style.display = 'none';
+  seedwords.style.display = 'none';
+  submitseedwords.style.display = 'none';
+  addcreds.style.display = 'none';
+  add.style.display = 'block';
+  login.style.display = 'add';
+  urlname.style.display = 'block';
+  username.style.display = 'block';
+  password.style.display = 'block'
+}
+
+function addsubmit(){
+  // send data and show add/login
+  var data = {
+    url: urlname.value,
+    user: username.value,
+    pass: password.value
+  }
+  verifyseedwords();
+}
+
+function fire(){
+  //fetch data and call general
 }
 
 function general(text) {
