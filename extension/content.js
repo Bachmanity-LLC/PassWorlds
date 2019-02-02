@@ -10,6 +10,7 @@ function gotMessage(message, sender, sendResponse) {
     //   }
     let username = document.querySelectorAll('[type="text"]');
     let password = document.querySelectorAll('[type="password"]');
+    let sub = document.querySelectorAll('[type="submit"]');
     //let sub = document.querySelectorAll('[type="submit"]');
     console.log(username);
     console.log(password);
@@ -17,6 +18,7 @@ function gotMessage(message, sender, sendResponse) {
     password[0].value = message["password"];
     console.log(message["username"]);
     console.log(message["password"]);
+
     // subInp[0].addEventListener("click", (e) => {
         // e.preventDefault();
         // console.log(passInp[0].value);
