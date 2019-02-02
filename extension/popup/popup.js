@@ -5,9 +5,11 @@ let submitseedwords = document.getElementById('submitseedwords');
 let addcreds = document.getElementById('addcreds');
 let add = document.getElementById('add');
 let Login = document.getElementById('login');
+let Logout = document.getElementById('logout');
 // // let urlname = document.getElementById('urlname');
 let username = document.getElementById('username');
 let password = document.getElementById('password');
+let showseeds = document.getElementById('showseeds');
 
 // useri.onclick = function (element) {
 //   let color = element.target.value;
@@ -34,6 +36,7 @@ submitseedwords.addEventListener('click',verifyseedwords);
 addcreds.addEventListener('click',showaddpage);
 add.addEventListener('click',addsubmit);
 Login.addEventListener('click',fire);
+Logout.addEventListener('click',logout);
 
 chrome.storage.sync.get(['key'], function(result) {
   if(result.key === true){
@@ -44,19 +47,38 @@ chrome.storage.sync.get(['key'], function(result) {
 
 function generateseedwords(){
   //generate function
-  var seeds = "here are seed words";
+  //var seeds = "here are seed words";
   chrome.storage.sync.get(['key'], function(result) {
     if(result.key === true){
       console.log("already generated!!");
       enterseedwords();
     }
     else{
+      var seedWords = generateSeed();
       chrome.storage.sync.set({'key': true}, function() {
         console.log("done!!");
-        enterseedwords();
+        showSeeds(seedWords);
+        //enterseedwords();
       });
     }
   });
+
+  function showSeeds(seedWords){
+    console.log(seedWords);
+    getseedwords.style.display = 'none';
+    postseedwords.style.display = 'none';
+    seedwords.style.display = 'none';
+    submitseedwords.style.display = 'none';
+    addcreds.style.display = 'none';
+    add.style.display = 'inline-block';
+    Login.style.display = 'none';
+    // urlname.style.display = 'none';
+    username.style.display = 'none';
+    password.style.display = 'none';  
+    showseeds.innerHTML = seedWords;  
+    showseeds.style.display = 'block';
+    Logout.style.display = 'inline-block';
+  }
 
   // chrome.storage.local.get(['key'], function(result) {
   //   console.log(result.key);
@@ -74,7 +96,9 @@ function enterseedwords(){
   Login.style.display = 'none';
   // urlname.style.display = 'none';
   username.style.display = 'none';
-  password.style.display = 'none'
+  password.style.display = 'none';
+  showseeds.style.display = 'none';
+  Logout.style.display = 'inline-block';
 }
 
 async function verifyseedwords(){
@@ -91,7 +115,9 @@ async function verifyseedwords(){
   Login.style.display = 'inline-block';
   // urlname.style.display = 'none';
   username.style.display = 'none';
-  password.style.display = 'none'
+  password.style.display = 'none';
+  showseeds.style.display = 'none';
+  Logout.style.display = 'inline-block';
 }
 
 function showaddpage(){
@@ -105,7 +131,27 @@ function showaddpage(){
   Login.style.display = 'none';
   // urlname.style.display = 'block';
   username.style.display = 'block';
-  password.style.display = 'block'
+  password.style.display = 'block';
+  showseeds.style.display = 'none';
+  Logout.style.display = 'inline-block';
+}
+
+function logout(){
+  chrome.storage.sync.set({'key': false}, function() {
+    console.log("logged out");
+    getseedwords.style.display = 'inline-block';
+    postseedwords.style.display = 'inline-block';
+    seedwords.style.display = 'none';
+    submitseedwords.style.display = 'none';
+    addcreds.style.display = 'none';
+    add.style.display = 'none';
+    Login.style.display = 'none';
+    // urlname.style.display = 'block';
+    username.style.display = 'none';
+    password.style.display = 'none';
+    showseeds.style.display = 'none';
+    Logout.style.display = 'none';
+  })
 }
 
 async function addsubmit(){
