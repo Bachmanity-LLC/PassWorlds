@@ -33172,21 +33172,105 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const CryptoJS = require('crypto-js');
 
-var seedWords = "chair inch unusual slam lava present office position address easy valley junior";
-const provider = new HDWalletProvider(
-    seedWords,
-    'https://ropsten.infura.io/v3/22be87df8e694b33a0c0b7acf4d67e9d'
-);
-
-const web3 = new Web3(provider);
-
-(async()=>{
-    const accounts = await web3.eth.getAccounts();
-    console.log(accounts[0]);
-})();
+var seedWords; // = "chair inch unusual slam lava present office position address easy valley junior";
 
 
-window.addpassword = async()=>{
+const abi = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "ipfsHash",
+				"type": "string"
+			}
+		],
+		"name": "setValue",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getValue",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+
+const address = '0xf4876282571768c93c3a71c02d399cfd5bffe26a';
+
+var contract;
+var accounts;
+var web3;
+
+window.login = async(seedwords)=>{
+    seedWords = seedwords;
+    const provider = new HDWalletProvider(
+        seedWords,
+        'https://ropsten.infura.io/v3/22be87df8e694b33a0c0b7acf4d67e9d'
+    );
+    web3 = new Web3(provider);
+    contract = new web3.eth.Contract(abi, address);
+    accounts = await web3.eth.getAccounts();
+}
+
+var setValue = async(ipfsHash)=>{
+    //console.log(ipfsHash);
+    await contract.methods.setValue(ipfsHash).send(
+        {
+            from: accounts[0],
+            gas: '1000000'
+        }
+    );
+    //console.log("test");
+}
+
+var getValue = async()=>{
+    var ipfsHashe = '';
+    try {
+        ipfsHashe = await contract.methods.getValue().call(
+            {
+                from: accounts[0],
+                gas: '1000000'
+            }
+        );
+    } catch (err) {
+        console.log(err);
+    }
+    //console.log("exisiting hash:"+ipfsHashe);
+    return ipfsHashe;
+}
+
+var setPassword = async(url,username,password)=>{
+    var ipfsHash = await getValue();
+    var obj;
+    console.log(ipfsHash);
+    if(ipfsHash == '')
+    {
+        console.log("null");
+        obj={};
+    }
+    else
+    {
+        console.log("some hash");
+        obj = await getJson(ipfsHash);
+        console.log("============="+obj);
+    }
+    obj[url] = [username,password];
+    console.log(obj);
+    addJson(obj);
+}
+
+var addJson = async(obj)=>{
     var xhr = new XMLHttpRequest();
     xhr.open("POST",'https://api.pinata.cloud/pinning/pinJSONToIPFS', true);
 
@@ -33197,29 +33281,65 @@ window.addpassword = async()=>{
 
     xhr.onreadystatechange = function() { // Call a function when the state changes.
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            console.log(this.responseText);
+            var response = this.responseText;
+            //response = response.json();
+            var response = JSON.parse(response);
+            console.log(response['IpfsHash']);
+            setValue(response['IpfsHash']);
         }
     }
-    const myObj = { "name":"John", "age":30, "car":null };
-    xhr.send(JSON.stringify(myObj));
+    //console.log(obj);
+    xhr.send(JSON.stringify(obj));
 }
 
 
-window.getPassword = async()=>{
-        var result = await fetch("https://gateway.ipfs.io/ipfs/QmbJ4btPtvg73XkdVUkkfySviuH2ApJq4bhQvLoepdjXSW");
+var getJson = async(ipfsHash)=>{
+        var url = "https://gateway.pinata.cloud/ipfs/"+ipfsHash;
+        var result = await fetch(url);
         result = await result.json();
-        console.log(result.name);
-        return result.name;
+        console.log("result:"+result);
+        return result;
 };
 
-window.encryptPassword = async(password)=>{
+var encrypt = async(password)=>{
+    //console.log(password);
+    //console.log(seedWords);
     var ciphertext = CryptoJS.AES.encrypt(password, seedWords).toString();
-    console.log(ciphertext);
-    // Decrypt
+    //console.log(ciphertext);
+    return ciphertext;
+}
+
+var decrypt = async(ciphertext)=>{
     var bytes  = await CryptoJS.AES.decrypt(ciphertext, seedWords);
     var originalText = await bytes.toString(CryptoJS.enc.Utf8);
-    console.log("+++++"+originalText); // 'my message'  
+    console.log(originalText); // 'my message'  
     return originalText;
+}
+
+window.addPassword = async(url,user,password)=>{
+    var encrypt_user = await encrypt(user);
+    var encrypt_password = await encrypt(password);
+    setPassword(url,encrypt_user,encrypt_password);
+}
+
+window.getPassword = async(url)=>{
+    var ipfsHash = await getValue();
+    var obj;
+    if(ipfsHash == '')
+    console.log("user has no added credentials");
+    else
+    obj = await getJson(ipfsHash);
+    if(url in obj){
+        list=obj[url];
+        var user = await decrypt(list[0]);
+        var password = await decrypt(list[1]);
+        return [ user,password ];
+    }
+    else
+    {
+        console.log("url not present!");
+    }
+    addJson(obj);
 }
 },{"crypto-js":257,"truffle-hdwallet-provider":388,"web3":446}],194:[function(require,module,exports){
 module.exports = require('./register')().Promise
