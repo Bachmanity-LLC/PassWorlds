@@ -16,5 +16,8 @@
       "default_icon": "images/logo.png",
       "default_popup": "popup/index.html",
       "default_title": "PassWorld!"
+    },
+    "background": {
+      "scripts": ["background.js"]
     }
 }

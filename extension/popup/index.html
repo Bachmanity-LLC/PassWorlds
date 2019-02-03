@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>test</title>
-    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
-  </head>
-  <body>
-    <h1>PassWorld</h1>
-    <img src="../images/logo.png" alt="">
-    <input id="seedwords" type="text" value="" placeholder="Enter the seeds" style="display:none;">
-    <input id="username" type="text" placeholder="username" style="display:none;">
-    <input id="password" type="password" placeholder="password" style="display:none;">
-    <h3 id="showseeds"></h3>
-    <input id="getseedwords" type="submit" value="Get">
-    <input id="postseedwords" type="submit" value="Post">
-    <input id="submitseedwords" type="submit" value="Submit" style="display:none;">
-    <input id="addcreds" type="submit" value="Add" style="display:none;">
-    <input id="add" type="submit" value="Add" style="display:none;">
-    <input id="login" type="submit" value="Login" style="display:none;">
-    <input id="logout" type="submit" value="Logout" style="display:none;">
+
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="main">
+    <div class="main__head">
+      <h1>PassWorld</h1>
+      <img src="../images/logo.png" alt="">
+    </div>
+    <div class="main__buttons">
+      <textarea rows="4" cols="20" id="seedwords" style="display:none;">Enter Seedphrase</textarea>
+      <input id="username" type="text" placeholder="username" style="display:none;">
+      <input id="password" type="password" placeholder="password" style="display:none;">
+      <div id="showseeds" style="display:none;">
+      </div>
+      <input id="getseedwords" type="submit" value="Get">
+      <input id="postseedwords" type="submit" value="Post">
+      <input id="submitseedwords" type="submit" value="Submit" style="display:none;">
+      <input id="addcreds" type="submit" value="Add" style="display:none;">
+      <input id="add" type="submit" value="Add" style="display:none;">
+      <input id="login" type="submit" value="Login" style="display:none;">
+      <input id="logout" type="submit" value="Logout" style="display:none;">
+    </div>
+  </div>
   <script type="text/javascript" src="../backend/bundle.js"></script>
   <script type="text/javascript" src="popup.js"></script>
-  </body>
+</body>
+
 </html>

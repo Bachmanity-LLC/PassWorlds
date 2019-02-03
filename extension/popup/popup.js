@@ -41,7 +41,19 @@ Logout.addEventListener('click',logout);
 chrome.storage.sync.get(['key'], function(result) {
   if(result.key === true){
     console.log("already generated!!");
-    enterseedwords();
+    //enterseedwords();
+    getseedwords.style.display = 'none';
+    postseedwords.style.display = 'none';
+    seedwords.style.display = 'none';
+    submitseedwords.style.display = 'none';
+    addcreds.style.display = 'inline-block';
+    add.style.display = 'none';
+    Login.style.display = 'inline-block';
+    // urlname.style.display = 'none';
+    username.style.display = 'none';
+    password.style.display = 'none';
+    showseeds.style.display = 'none';
+    Logout.style.display = 'inline-block';
   }
 });
 
@@ -51,7 +63,19 @@ function generateseedwords(){
   chrome.storage.sync.get(['key'], function(result) {
     if(result.key === true){
       console.log("already generated!!");
-      enterseedwords();
+      //enterseedwords();
+      getseedwords.style.display = 'none';
+      postseedwords.style.display = 'none';
+      seedwords.style.display = 'none';
+      submitseedwords.style.display = 'none';
+      addcreds.style.display = 'inline-block';
+      add.style.display = 'none';
+      Login.style.display = 'inline-block';
+      // urlname.style.display = 'none';
+      username.style.display = 'none';
+      password.style.display = 'none';
+      showseeds.style.display = 'none';
+      Logout.style.display = 'inline-block';
     }
     else{
       var seedWords = generateSeed();
@@ -64,6 +88,27 @@ function generateseedwords(){
   });
 
   function showSeeds(seedWords){
+    const el = document.createElement('textarea');  
+    el.value = seedWords;                           
+    el.setAttribute('readonly', '');                
+    el.style.position = 'absolute';                 
+    el.style.left = '-9999px';                      
+    document.body.appendChild(el);                  
+    const selected =            
+      document.getSelection().rangeCount > 0        
+        ? document.getSelection().getRangeAt(0)     
+        : false;                                    
+    el.select();                                    
+    document.execCommand('copy');                 
+    document.body.removeChild(el);
+    if (selected) {                                 
+      document.getSelection().removeAllRanges();    
+      document.getSelection().addRange(selected);
+    }
+    while (showseeds.firstChild) {
+      showseeds.removeChild(showseeds.firstChild);
+    }
+    seedWords = seedWords.split(" ");
     console.log(seedWords);
     getseedwords.style.display = 'none';
     postseedwords.style.display = 'none';
@@ -75,7 +120,24 @@ function generateseedwords(){
     // urlname.style.display = 'none';
     username.style.display = 'none';
     password.style.display = 'none';  
-    showseeds.innerHTML = seedWords;  
+    // showseeds.innerHTML = seedWords;
+    var cpySeed = document.createElement("i");
+    cpySeed.classList.add("fa");
+    cpySeed.classList.add("fa-copy");
+    cpySeed.addEventListener("click",(e) => {alert("seedPhrase copied!");})
+    var seedheading = document.createElement("span");
+    seedheading.classList.add("seedHead");
+    seedheading.innerHTML = "Seedphrase";
+    showseeds.appendChild(seedheading);
+    showseeds.appendChild(cpySeed);
+    showseeds.appendChild(document.createElement("br"));
+    seedWords.forEach((seed) => {
+      console.log(seed);
+      var seedE = document.createElement("div");
+      seedE.innerHTML = " "+seed+" ";
+      seedE.classList.add("seed");
+      showseeds.appendChild(seedE);
+    });
     showseeds.style.display = 'block';
     Logout.style.display = 'inline-block';
   }
@@ -90,7 +152,7 @@ function enterseedwords(){
   getseedwords.style.display = 'none';
   postseedwords.style.display = 'none';
   seedwords.style.display = 'block';
-  submitseedwords.style.display = 'block';
+  submitseedwords.style.display = 'inline-block';
   addcreds.style.display = 'none';
   add.style.display = 'none';
   Login.style.display = 'none';
