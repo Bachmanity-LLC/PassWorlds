@@ -55,6 +55,8 @@ chrome.storage.sync.get(['key'], function(result) {
     showseeds.style.display = 'none';
     Logout.style.display = 'inline-block';
   }
+  else
+    console.log("oooooooooooooooooooo");
 });
 
 function generateseedwords(){
@@ -168,6 +170,9 @@ async function verifyseedwords(){
   // if true set in local storage and show Login button and add button
   // else same enter seedwords
   await login(seedwords.value);
+  chrome.storage.sync.set({'key': true}, function() {
+    console.log("done!!!!!");
+  });
   getseedwords.style.display = 'none';
   postseedwords.style.display = 'none';
   seedwords.style.display = 'none';
