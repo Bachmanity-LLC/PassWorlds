@@ -35,13 +35,23 @@
 - `Accessible` as there is not seperate platform but a chrome extension to use the service.
 - `Efficient` considering the scalability factor, data gets stored off chain without compromising security.
 
-<!-- <div align="center">
+------------------------------------------
+### Demo
+<div align="center">
 
-<h3 > Briefly As Web-App  </h3>
+<h3 > Sign-In  </h3>
 <br>
 <p align="center">
-<img src ="./assets/briefly-web.gif" width = 500px>
-</p> -->
+<img src ="./extension/images/Sign-In.gif" max-width = 600px>
+</p>
+
+<h3 > Import  </h3>
+<br>
+<p align="center">
+<img src ="./extension/images/Import.gif" max-width = 600px>
+</p>
+
+</div>
 
 
 ------------------------------------------

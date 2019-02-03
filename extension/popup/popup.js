@@ -94,6 +94,15 @@ function generateseedwords(){
   });
 
   function showSeeds(seedWords){
+                 
+    // document.body.removeChild(el);
+    // if (selected) {                                 
+      // document.getSelection().removeAllRanges();    
+      // document.getSelection().addRange(selected);
+    // }
+    while (showseeds.firstChild) {
+      showseeds.removeChild(showseeds.firstChild);
+    }
     const el = document.createElement('textarea');  
     el.value = seedWords;                           
     el.setAttribute('readonly', '');                
@@ -104,18 +113,10 @@ function generateseedwords(){
       document.getSelection().rangeCount > 0        
         ? document.getSelection().getRangeAt(0)     
         : false;                                    
-    el.select();                                    
-    document.execCommand('copy');                 
-    document.body.removeChild(el);
-    if (selected) {                                 
-      document.getSelection().removeAllRanges();    
-      document.getSelection().addRange(selected);
-    }
-    while (showseeds.firstChild) {
-      showseeds.removeChild(showseeds.firstChild);
-    }
-    seedWords = seedWords.split(" ");
-    console.log(seedWords);
+    el.select();
+
+    seedWordsx = seedWords.split(" ");
+    // console.log(seedWords);
     getseedwords.style.display = 'none';
     postseedwords.style.display = 'none';
     seedwords.style.display = 'none';
@@ -126,7 +127,7 @@ function generateseedwords(){
     }else{
       add.innerHTML = "Add"
     }
-    add.style.display = 'inline-block';
+    add.style.display = 'none';
     Login.style.display = 'none';
     // urlname.style.display = 'none';
     username.style.display = 'none';
@@ -135,23 +136,25 @@ function generateseedwords(){
     var cpySeed = document.createElement("i");
     cpySeed.classList.add("fa");
     cpySeed.classList.add("fa-copy");
-    cpySeed.addEventListener("click",(e) => {alert("seedPhrase copied!");})
+    cpySeed.addEventListener("click",(e) => { 
+      document.execCommand('copy');
+      alert("seedPhrase copied!");})
     var seedheading = document.createElement("span");
     seedheading.classList.add("seedHead");
     seedheading.innerHTML = "Seedphrase";
     showseeds.appendChild(seedheading);
     showseeds.appendChild(cpySeed);
     showseeds.appendChild(document.createElement("br"));
-    seedWords.forEach((seed) => {
-      console.log(seed);
+    seedWordsx.forEach((seed) => {
+      // console.log(seed);
       var seedE = document.createElement("div");
       seedE.innerHTML = " "+seed+" ";
       seedE.classList.add("seed");
       showseeds.appendChild(seedE);
     });
     showseeds.style.display = 'block';
-    Logout.style.display = 'inline-block';
-    Logout.style.width = '100px';
+    Logout.style.display = 'block';
+    Logout.style.width = '250px';
     add.style.width = '100px';
   }
 
@@ -182,11 +185,12 @@ async function verifyseedwords(){
   // else same enter seedwords
   var loadingC = document.getElementsByClassName("loader")[0];
   var mainC = document.getElementsByClassName("main")[0];
-  loadingC.style.display = "block";
-  mainC.style.display = "none";
+  // loadingC.style.display = "block";
+  // mainC.style.display = "none";
+  console.log(seedwords.value);
   await login(seedwords.value);
-  mainC.style.display = "flex";
-  loadingC.style.display = "none"; 
+  // mainC.style.display = "flex";
+  // loadingC.style.display = "none"; 
 
   chrome.storage.sync.set({'key': true}, function() {
     console.log("done!!!!!");
@@ -263,8 +267,10 @@ async function addsubmit(){
     mainC.style.display = "none";
     await addPassword(url,user,pass);
     await verifyseedwords();
-    mainC.style.display = "flex";
-    loadingC.style.display = "none"; 
+    setTimeout(() => {
+      mainC.style.display = "flex";
+      loadingC.style.display = "none";
+    },30000)
     }
   );
 }
