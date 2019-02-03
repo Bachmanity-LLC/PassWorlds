@@ -64,39 +64,39 @@ h1{
 }
 
 #addcreds {
-    border: 2px solid #fffb01;
-    color: #fffb01;
+    border: 2px solid #FFA500;
+    color: #FFA500;
 }
 
 #addcreds:hover{
     color: #fff;
     border: 2px solid transparent;
-    background: #fffb01;
-    box-shadow: 0 7.5px 10px 0 rgba(238,238,34,0.3);
+    background: #FFA500;
+    box-shadow: 0 7.5px 10px 0 rgba(255,165,0,0.3);
 }
 
 #add {
-    border: 2px solid #fffb01;
-    color: #fffb01;
+    border: 2px solid #FFA500;
+    color: #FFA500;
 }
 
 #add:hover{
     color: #fff;
     border: 2px solid transparent;
-    background: #fffb01;
-    box-shadow: 0 7.5px 10px 0 rgba(238,238,34,0.3);
+    background: #FFA500;
+    box-shadow: 0 7.5px 10px 0 rgba(255,165,0,0.3);
 }
 
 #getseedwords {
-    border: 2px solid #fffb01;
-    color: #fffb01;
+    border: 2px solid #FFA500;
+    color: #FFA500;
 }
 
 #getseedwords:hover{
     color: #fff;
     border: 2px solid transparent;
-    background: #fffb01;
-    box-shadow: 0 7.5px 10px 0 rgba(238,238,34,0.3);
+    background: #FFA500;
+    box-shadow: 0 7.5px 10px 0 rgba(255,165,0,0.3);
 }
 
 #logout {
