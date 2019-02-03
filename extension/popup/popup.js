@@ -58,6 +58,8 @@ chrome.storage.sync.get(['key'], function(result) {
     Logout.style.display = 'block';
     Logout.style.width = '250px';
   }
+  else
+    console.log("oooooooooooooooooooo");
 });
 
 function generateseedwords(){
@@ -186,6 +188,9 @@ async function verifyseedwords(){
   mainC.style.display = "flex";
   loadingC.style.display = "none"; 
 
+  chrome.storage.sync.set({'key': true}, function() {
+    console.log("done!!!!!");
+  });
   getseedwords.style.display = 'none';
   postseedwords.style.display = 'none';
   seedwords.style.display = 'none';
