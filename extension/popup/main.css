@@ -7,6 +7,7 @@ body{
     width: 300px;
     height: 550px;
     border-radius: 5px;
+    margin: 0;
     /* background: #222; */
 }
 
@@ -34,13 +35,13 @@ h1{
 }
 
 [type="submit"]{
-    margin: 10px 10px;
     /* padding: 10px 10px; */
-    width: 100px;
     cursor: pointer;
     border: 2px solid #11ee11;
     color: #11ee11;
     background: transparent;
+    width: 250px;
+    margin: 10px auto;
 }
 
 [type="submit"]:hover{
@@ -163,4 +164,19 @@ textarea:hover{
     font-size: 1.5em;
     font-weight: 400;
     margin: 5px;
+}
+
+.loader{
+    position: absolute;
+    height: 550px;
+    width: 300px;
+    /* left: 0; */
+    /* top: 0; */
+}
+
+.loader img{
+    margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translate(0%,-50%);
 }

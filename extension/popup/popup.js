@@ -38,6 +38,8 @@ add.addEventListener('click',addsubmit);
 Login.addEventListener('click',fire);
 Logout.addEventListener('click',logout);
 
+var alreadyFlag = 0;
+
 chrome.storage.sync.get(['key'], function(result) {
   if(result.key === true){
     console.log("already generated!!");
@@ -46,14 +48,15 @@ chrome.storage.sync.get(['key'], function(result) {
     postseedwords.style.display = 'none';
     seedwords.style.display = 'none';
     submitseedwords.style.display = 'none';
-    addcreds.style.display = 'inline-block';
+    addcreds.style.display = 'block';
     add.style.display = 'none';
-    Login.style.display = 'inline-block';
+    Login.style.display = 'block';
     // urlname.style.display = 'none';
     username.style.display = 'none';
     password.style.display = 'none';
     showseeds.style.display = 'none';
-    Logout.style.display = 'inline-block';
+    Logout.style.display = 'block';
+    Logout.style.width = '250px';
   }
 });
 
@@ -68,14 +71,15 @@ function generateseedwords(){
       postseedwords.style.display = 'none';
       seedwords.style.display = 'none';
       submitseedwords.style.display = 'none';
-      addcreds.style.display = 'inline-block';
+      addcreds.style.display = 'block';
       add.style.display = 'none';
-      Login.style.display = 'inline-block';
+      Login.style.display = 'block';
       // urlname.style.display = 'none';
       username.style.display = 'none';
       password.style.display = 'none';
       showseeds.style.display = 'none';
-      Logout.style.display = 'inline-block';
+      Logout.style.display = 'block';
+      Logout.style.width = '250px';
     }
     else{
       var seedWords = generateSeed();
@@ -115,6 +119,11 @@ function generateseedwords(){
     seedwords.style.display = 'none';
     submitseedwords.style.display = 'none';
     addcreds.style.display = 'none';
+    if(alreadyFlag == 1){
+      add.innerHTML = "Edit"
+    }else{
+      add.innerHTML = "Add"
+    }
     add.style.display = 'inline-block';
     Login.style.display = 'none';
     // urlname.style.display = 'none';
@@ -140,6 +149,8 @@ function generateseedwords(){
     });
     showseeds.style.display = 'block';
     Logout.style.display = 'inline-block';
+    Logout.style.width = '100px';
+    add.style.width = '100px';
   }
 
   // chrome.storage.local.get(['key'], function(result) {
@@ -152,7 +163,7 @@ function enterseedwords(){
   getseedwords.style.display = 'none';
   postseedwords.style.display = 'none';
   seedwords.style.display = 'block';
-  submitseedwords.style.display = 'inline-block';
+  submitseedwords.style.display = 'block';
   addcreds.style.display = 'none';
   add.style.display = 'none';
   Login.style.display = 'none';
@@ -160,26 +171,33 @@ function enterseedwords(){
   username.style.display = 'none';
   password.style.display = 'none';
   showseeds.style.display = 'none';
-  Logout.style.display = 'inline-block';
+  Logout.style.display = 'block';
 }
 
 async function verifyseedwords(){
   // truffle call
   // if true set in local storage and show Login button and add button
   // else same enter seedwords
+  var loadingC = document.getElementsByClassName("loader")[0];
+  var mainC = document.getElementsByClassName("main")[0];
+  loadingC.style.display = "block";
+  mainC.style.display = "none";
   await login(seedwords.value);
+  mainC.style.display = "flex";
+  loadingC.style.display = "none"; 
+
   getseedwords.style.display = 'none';
   postseedwords.style.display = 'none';
   seedwords.style.display = 'none';
   submitseedwords.style.display = 'none';
-  addcreds.style.display = 'inline-block';
+  addcreds.style.display = 'block';
   add.style.display = 'none';
-  Login.style.display = 'inline-block';
+  Login.style.display = 'block';
   // urlname.style.display = 'none';
   username.style.display = 'none';
   password.style.display = 'none';
   showseeds.style.display = 'none';
-  Logout.style.display = 'inline-block';
+  Logout.style.display = 'block';
 }
 
 function showaddpage(){
@@ -189,20 +207,25 @@ function showaddpage(){
   seedwords.style.display = 'none';
   submitseedwords.style.display = 'none';
   addcreds.style.display = 'none';
-  add.style.display = 'inline-block';
+  if(alreadyFlag == 1){
+    add.innerHTML = "Edit"
+  }else{
+    add.innerHTML = "Add"
+  }
+  add.style.display = 'block';
   Login.style.display = 'none';
   // urlname.style.display = 'block';
   username.style.display = 'block';
   password.style.display = 'block';
   showseeds.style.display = 'none';
-  Logout.style.display = 'inline-block';
+  Logout.style.display = 'block';
 }
 
 function logout(){
   chrome.storage.sync.set({'key': false}, function() {
     console.log("logged out");
-    getseedwords.style.display = 'inline-block';
-    postseedwords.style.display = 'inline-block';
+    getseedwords.style.display = 'block';
+    postseedwords.style.display = 'block';
     seedwords.style.display = 'none';
     submitseedwords.style.display = 'none';
     addcreds.style.display = 'none';
@@ -229,8 +252,14 @@ async function addsubmit(){
     var pass = password.value;
     //var test = await encryptPassword(data["user"]+data["pass"]);
     //console.log("hash:"+test);
+    var loadingC = document.getElementsByClassName("loader")[0];
+    var mainC = document.getElementsByClassName("main")[0];
+    loadingC.style.display = "block";
+    mainC.style.display = "none";
     await addPassword(url,user,pass);
-    verifyseedwords();
+    await verifyseedwords();
+    mainC.style.display = "flex";
+    loadingC.style.display = "none"; 
     }
   );
 }
@@ -248,6 +277,7 @@ function fire(){
       username:data[0],
       password:data[1]
     };
+    alreadyFlag = data[2];
     chrome.tabs.sendMessage(atabs[0].id,text);
   }
   );
