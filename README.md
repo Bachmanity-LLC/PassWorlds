@@ -1,3 +1,5 @@
+<h2 align="center">PassWorlds</h2>
+
 <p align="center">
   <a href="" rel="noopener">
  <img max-width=300px src="./extension/images/logo2.png" alt="PassWorlds-logo"></a>
