@@ -34,6 +34,7 @@
 - `Reliable` as all the data is stored in a decentralized way using IPFS.
 - `Accessible` as there is not seperate platform but a chrome extension to use the service.
 - `Efficient` considering the scalability factor, data gets stored off chain without compromising security.
+- `Practical` fits into the existing system directly without need of any modification.
 
 ------------------------------------------
 ### Demo
