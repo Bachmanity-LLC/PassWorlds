@@ -80,3 +80,7 @@
 - [@shivam1708](https://github.com/shivam1708)
 - [@freelancer-98](https://github.com/Freelancer-98)
 
+-------------------------------------------
+### Recognition
+- This repository / project was a part of [@DotSlash Hackathon 2018](https://www.facebook.com/hackatdotslash/) where it got recognized as runner up in Blockchain Track.
+
