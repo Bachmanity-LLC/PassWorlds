@@ -82,5 +82,5 @@
 
 -------------------------------------------
 ### Recognition
-- This repository / project was a part of [@DotSlash Hackathon 2018](https://www.facebook.com/hackatdotslash/) where it got recognized as runner up in Blockchain Track.
+- This repository / project was a part of [@DotSlash Hackathon 2018](https://www.facebook.com/hackatdotslash/) where it got recognized as runner up in Blockchain Track and Top 6 overall.
 
