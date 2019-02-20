@@ -59,7 +59,7 @@
 ### Installation
 
 ``` sh
-- git clone https://github.com/nurdtechie98/PassWorlds.git
+$ git clone https://github.com/nurdtechie98/PassWorlds.git
 ```
 - Open chrome://extensions/ on browser and turn on developer mode.
 - Under `load unpacked` add extensions folder from PassWorlds directory.
